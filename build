@@ -48,8 +48,8 @@ while read CONFIG; do
 	git clean -xdfq
 	autoreconf --install
 	./configure --quiet $CONFIG || exit 1
-	sed -i 's/m4 po intl doc contrib//' Makefile
-	sed -i 's/echo "Making $$target in $$subdir";//' Makefile
+	sed -i 's/m4 po intl doc contrib/intl/' Makefile
+	# sed -i 's/echo "Making $$target in $$subdir";//' Makefile
 	sed -i 's/\<cru\>/cr/' imap/Makefile
 	sed -i '/USE_DOTLOCK/d' config.h
 	make -s || exit 1
