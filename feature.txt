@@ -1,0 +1,2 @@
+
+--enable-pop --enable-imap --enable-smtp --enable-debug --enable-flock --enable-nfs-fix --enable-mailtool --enable-locales-fix --enable-exact-address --with-homespool --with-domain --with-regex --enable-gpgme --with-mixmaster --enable-hcache --with-gnutls --with-gss --with-sasl --with-ssl --with-tokyocabinet --without-bdb --without-gdbm --without-qdbm

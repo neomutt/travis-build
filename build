@@ -1,0 +1,50 @@
+#!/bin/bash
+
+eval CONFIG_DIR="~/config"
+
+function get_config_location()
+{
+	local TEST="/$1"
+
+	while [ -n "$TEST" ]; do
+		if [ -f "$CONFIG_DIR${TEST}.txt" ]; then
+			echo "$CONFIG_DIR${TEST}.txt"
+			return
+		fi
+		TEST="${TEST%/*}"
+	done
+
+	echo "$CONFIG_DIR/default.txt"
+}
+
+
+BRANCH=$(git branch | grep "*" | cut -b3-)
+
+FILE=$(get_config_location $BRANCH)
+LEN=$(wc -l "$FILE" | cut -d' ' -f1)
+echo "BRANCH: $BRANCH ($LEN configuration$([ $LEN != 1 ] && echo 's'))"
+echo "-------------------------------------------------------------------------------"
+BUILD_COUNT=0
+while read CONFIG; do
+	: $((BUILD_COUNT++))
+	echo "BUILD: $BUILD_COUNT/$LEN"
+	if [ -n "$CONFIG" ]; then
+		echo $CONFIG | fmt -w 75 | sed 's/^/    /'
+	else
+		echo "    <no options>"
+	fi
+	echo
+	git clean -xdfq
+	autoreconf --install
+	./configure --quiet $CONFIG || exit 1
+	sed -i 's/m4 po intl doc contrib//' Makefile
+	sed -i 's/echo "Making $$target in $$subdir";//' Makefile
+	sed -i 's/\<cru\>/cr/' imap/Makefile
+	sed -i '/USE_DOTLOCK/d' config.h
+	make -s || exit 1
+	echo "-------------------------------------------------------------------------------"
+done < "$FILE"
+
+echo Success
+exit 0
+
