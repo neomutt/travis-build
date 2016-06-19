@@ -42,4 +42,3 @@
 --with-slang
 --with-mailpath=/home/mutt/mail
 --with-exec-shell=/bin/bash
---enable-notmuch --enable-sidebar

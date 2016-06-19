@@ -1,6 +1,8 @@
 
+--with-slang
 --enable-notmuch
 --enable-sidebar
 --enable-notmuch --enable-sidebar
+--enable-notmuch --enable-sidebar --with-slang
 --enable-hcache --enable-notmuch --enable-sidebar --without-bdb --without-gdbm --without-qdbm
 --enable-imap --enable-notmuch --enable-sidebar

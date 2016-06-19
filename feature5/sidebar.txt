@@ -1,2 +1,4 @@
 
+--with-slang
 --enable-sidebar
+--enable-sidebar --with-slang

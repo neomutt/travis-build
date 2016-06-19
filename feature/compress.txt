@@ -1,2 +1,4 @@
 
+--with-slang
 --enable-compressed
+--enable-compressed --with-slang
