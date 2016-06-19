@@ -52,7 +52,7 @@ while read CONFIG; do
 	# sed -i 's/echo "Making $$target in $$subdir";//' Makefile
 	sed -i 's/\<cru\>/cr/' imap/Makefile
 	sed -i '/USE_DOTLOCK/d' config.h
-	make -s || exit 1
+	make -s -j2 || exit 1
 	echo "-------------------------------------------------------------------------------"
 done < "$FILE"
 
