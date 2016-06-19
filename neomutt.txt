@@ -27,17 +27,9 @@
 --enable-gpgme
 --with-mixmaster
 --enable-pop --enable-imap --enable-smtp --enable-debug --enable-flock --enable-nfs-fix --enable-mailtool --enable-locales-fix --enable-exact-address --with-homespool --with-domain --with-regex --enable-sidebar --enable-notmuch --enable-gpgme --with-mixmaster
---enable-hcache --with-lmdb    --without-bdb --without-gdbm --without-qdbm --without-tokyocabinet
---enable-hcache --without-lmdb --without-bdb --with-gdbm    --without-qdbm --without-tokyocabinet
---enable-hcache --without-lmdb --without-bdb --without-gdbm --with-qdbm    --without-tokyocabinet
---enable-hcache --without-lmdb --without-bdb --without-gdbm --without-qdbm --with-tokyocabinet   
---with-gss --enable-imap
---with-ssl --enable-pop
---with-ssl --enable-imap
---with-ssl --enable-smtp
---with-gnutls --enable-pop
---with-gnutls --enable-imap
---with-gnutls --enable-smtp
+--enable-hcache --with-tokyocabinet    --without-gdbm --without-bdb --without-qdbm
+--enable-hcache --without-tokyocabinet --with-gdbm    --without-bdb --without-qdbm
+--enable-hcache --without-tokyocabinet --without-gdbm --with-bdb    --without-qdbm
 --with-sasl --enable-pop
 --with-sasl --enable-imap
 --with-slang

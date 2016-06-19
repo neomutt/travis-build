@@ -25,9 +25,9 @@
 --enable-gpgme
 --with-mixmaster
 --enable-pop --enable-imap --enable-smtp --enable-debug --enable-flock --enable-nfs-fix --enable-mailtool --enable-locales-fix --enable-exact-address --with-homespool --with-domain --with-regex --enable-sidebar --enable-notmuch --enable-gpgme --with-mixmaster
---enable-hcache --with-tokyocabinet    --without-qdbm --without-gdbm --without-bdb
---enable-hcache --without-tokyocabinet --with-qdbm    --without-gdbm --without-bdb
---enable-hcache --without-tokyocabinet --without-qdbm --with-gdbm    --without-bdb
+--enable-hcache --with-tokyocabinet    --without-gdbm --without-bdb --without-qdbm
+--enable-hcache --without-tokyocabinet --with-gdbm    --without-bdb --without-qdbm
+--enable-hcache --without-tokyocabinet --without-gdbm --with-bdb    --without-qdbm
 --with-gss --enable-imap
 --with-ssl --enable-pop
 --with-ssl --enable-imap
