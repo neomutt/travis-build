@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for i in "$@"; do
+	while read LINE; do
+		echo "$LINE" | sed 's/\s\+/\n/g' | LANG=C sort -f | paste -s -d' '
+	done < "$i" > $i-
+	mv $i- $i
+	echo $i
+done
+

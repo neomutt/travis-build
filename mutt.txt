@@ -7,7 +7,7 @@
 --without-wc-funcs
 --disable-pgp
 --disable-smime
---disable-fcntl --disable-iconv --disable-nls --with-included-gettext --without-idn --without-wc-funcs --disable-pgp --disable-smime
+--disable-fcntl --disable-iconv --disable-nls --disable-pgp --disable-smime --with-included-gettext --without-idn --without-wc-funcs
 --enable-pop
 --enable-imap
 --enable-smtp
@@ -22,18 +22,18 @@
 --with-regex
 --enable-gpgme
 --with-mixmaster
---enable-pop --enable-imap --enable-smtp --enable-debug --enable-flock --enable-nfs-fix --enable-mailtool --enable-locales-fix --enable-exact-address --with-homespool --with-domain --with-regex --enable-gpgme --with-mixmaster
---enable-hcache --without-qdbm --without-gdbm --without-bdb
---enable-hcache --without-tokyocabinet --without-qdbm --without-bdb
---enable-hcache --without-tokyocabinet --without-qdbm --without-gdbm
---with-gss --enable-imap
---with-ssl --enable-pop
---with-ssl --enable-imap
---with-ssl --enable-smtp
---with-gnutls --enable-pop
---with-gnutls --enable-imap
---with-gnutls --enable-smtp
---with-sasl --enable-pop
---with-sasl --enable-imap
+--enable-exact-address --enable-flock --enable-gpgme --enable-imap --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-pop --enable-smtp --with-domain --with-homespool --with-mixmaster --with-regex
+--enable-hcache --without-bdb --without-gdbm --without-qdbm
+--enable-hcache --without-bdb --without-qdbm --without-tokyocabinet
+--enable-hcache --without-gdbm --without-qdbm --without-tokyocabinet
+--enable-imap --with-gss
+--enable-pop --with-ssl
+--enable-imap --with-ssl
+--enable-smtp --with-ssl
+--enable-pop --with-gnutls
+--enable-imap --with-gnutls
+--enable-smtp --with-gnutls
+--enable-pop --with-sasl
+--enable-imap --with-sasl
 --with-mailpath=/home/mutt/mail
 --with-exec-shell=/bin/bash

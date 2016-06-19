@@ -1,6 +1,6 @@
 
 --enable-notmuch
 --enable-sidebar
---enable-sidebar --enable-notmuch
---enable-sidebar --enable-notmuch --enable-hcache --without-qdbm --without-gdbm --without-bdb
---enable-sidebar --enable-notmuch --enable-imap
+--enable-notmuch --enable-sidebar
+--enable-hcache --enable-notmuch --enable-sidebar --without-bdb --without-gdbm --without-qdbm
+--enable-imap --enable-notmuch --enable-sidebar
