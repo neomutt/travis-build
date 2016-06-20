@@ -54,7 +54,7 @@ while read CONFIG; do
 	sed -i '/USE_DOTLOCK/d' config.h
 	make -s -j2 || exit 1
 	echo
-	mutt -v
+	./mutt -v
 	echo "-------------------------------------------------------------------------------"
 done < "$FILE"
 
