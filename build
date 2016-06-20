@@ -30,7 +30,7 @@ else
 	FILE=$(get_config_location $BRANCH)
 fi
 
-LEN=$(wc -l "$FILE" | cut -d' ' -f1)
+LEN=$(wc -l "$FILE" | awk '{print $1}')
 echo "-------------------------------------------------------------------------------"
 echo "BRANCH: $BRANCH ($LEN configuration$([ $LEN != 1 ] && echo 's'))"
 echo "CONFIG FILE: ${FILE#$CONFIG_DIR/}"
@@ -60,4 +60,3 @@ done < "$FILE"
 
 echo Success
 exit 0
-
