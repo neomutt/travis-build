@@ -21,7 +21,7 @@ function get_config_location()
 if [ -n "$TRAVIS_BRANCH" ]; then
 	BRANCH="$TRAVIS_BRANCH"
 else
-	BRANCH=$(git branch | grep "*" | cut -b3-)
+	BRANCH=$(git rev-parse --abbrev-ref HEAD)
 fi
 
 if [[ "$TRAVIS_PULL_REQUEST" =~ ^[0-9]+$ ]]; then
