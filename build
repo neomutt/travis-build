@@ -3,6 +3,7 @@
 set -e
 
 eval CONFIG_DIR="~/config"
+# eval CONFIG_DIR="./.config"
 
 function get_config_location()
 {
@@ -73,6 +74,10 @@ fi
 LEN=$(wc -l "$FILE" | cut -d' ' -f1)
 
 if [[ $BRANCH == "bugs/"* && ! -z "$TRAVIS_COMMIT_RANGE" ]]; then
+	echo "-------------------------------------------------------"
+	echo "In Bug Branch: $BRANCH"
+	echo "Will build all new commits"
+	echo "-------------------------------------------------------"
 	while read -r rev; do
 		git checkout "$rev"
 		echo "Commit: $rev"
