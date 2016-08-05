@@ -75,6 +75,7 @@ LEN=$(wc -l "$FILE" | cut -d' ' -f1)
 if [[ $BRANCH == "bugs/"* && ! -z "$TRAVIS_COMMIT_RANGE" ]]; then
 	while read -r rev; do
 		git checkout "$rev"
+		echo "Commit: $rev"
 		_run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
 	done < <(git rev-list $TRAVIS_COMMIT_RANGE)
 else
