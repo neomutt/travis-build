@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 eval CONFIG_DIR="~/config"
 
 function get_config_location()
@@ -17,6 +19,44 @@ function get_config_location()
 	echo "$CONFIG_DIR/default.txt"
 }
 
+_run_build() {
+	if [[ $# -ne 4 ]]; then
+		echo "Illegal arguments passed."
+		return
+	fi
+	BRANCH="$1"
+	LEN="$2"
+	FILE="$3"
+	CONFIG_DIR="$4"
+
+	echo "-------------------------------------------------------------------------------"
+	echo "BRANCH: $BRANCH ($LEN configuration$([ $LEN != 1 ] && echo 's'))"
+	echo "CONFIG FILE: ${FILE#$CONFIG_DIR/}"
+	echo "-------------------------------------------------------------------------------"
+	BUILD_COUNT=0
+	while read CONFIG; do
+		: $((BUILD_COUNT++))
+		echo "BUILD: $BUILD_COUNT/$LEN"
+		if [ -n "$CONFIG" ]; then
+			echo $CONFIG | fmt -w 75 | sed 's/^/    /'
+		else
+			echo "    <no options>"
+		fi
+		echo
+		git clean -xdfq
+		autoreconf --install
+		./configure --quiet $CONFIG || exit 1
+		sed -i 's/m4 po intl doc contrib/intl/' Makefile
+		# sed -i 's/echo "Making $$target in $$subdir";//' Makefile
+		sed -i 's/\<cru\>/cr/' imap/Makefile
+		sed -i '/USE_DOTLOCK/d' config.h
+		make -s -j2 || exit 1
+		echo
+		./mutt -v
+		echo "-------------------------------------------------------------------------------"
+	done < "$FILE"
+}
+
 
 if [ -n "$TRAVIS_BRANCH" ]; then
 	BRANCH="$TRAVIS_BRANCH"
@@ -31,33 +71,16 @@ else
 fi
 
 LEN=$(wc -l "$FILE" | cut -d' ' -f1)
-echo "-------------------------------------------------------------------------------"
-echo "BRANCH: $BRANCH ($LEN configuration$([ $LEN != 1 ] && echo 's'))"
-echo "CONFIG FILE: ${FILE#$CONFIG_DIR/}"
-echo "-------------------------------------------------------------------------------"
-BUILD_COUNT=0
-while read CONFIG; do
-	: $((BUILD_COUNT++))
-	echo "BUILD: $BUILD_COUNT/$LEN"
-	if [ -n "$CONFIG" ]; then
-		echo $CONFIG | fmt -w 75 | sed 's/^/    /'
-	else
-		echo "    <no options>"
-	fi
-	echo
-	git clean -xdfq
-	autoreconf --install
-	./configure --quiet $CONFIG || exit 1
-	sed -i 's/m4 po intl doc contrib/intl/' Makefile
-	# sed -i 's/echo "Making $$target in $$subdir";//' Makefile
-	sed -i 's/\<cru\>/cr/' imap/Makefile
-	sed -i '/USE_DOTLOCK/d' config.h
-	make -s -j2 || exit 1
-	echo
-	./mutt -v
-	echo "-------------------------------------------------------------------------------"
-done < "$FILE"
+
+if [[ $BRANCH == "bugs/"* ]]; then
+	while read -r rev; do
+		git checkout "$rev"
+		_run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
+	done < <(git rev-list $TRAVIS_COMMIT_RANGE)
+else
+	_run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
+fi
+
 
 echo Success
 exit 0
-
