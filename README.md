@@ -15,12 +15,12 @@ use the default.
 
 ### Examples
 
-**Branch**: feature/sidebar
-- **feature/sidebar.txt** exists
+**Branch**: devel/sidebar
+- **devel/sidebar.txt** exists
 
-**Branch**: feature5/status-color
-- feature5/status-color.txt doesn't exist
-- **feature5.txt** exists
+**Branch**: devel/status-color
+- devel/status-color.txt doesn't exist
+- **devel.txt** exists
 
 **Branch**: coverity
 - coverity.txt doesn't exist
