@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -e
+set -o errexit	# set -e
+set -o nounset	# set -u
 
 eval CONFIG_DIR="~/config"
-# eval CONFIG_DIR="./.config"
 
 function get_config_location()
 {
@@ -20,7 +20,8 @@ function get_config_location()
 	echo "$CONFIG_DIR/default.txt"
 }
 
-_run_build() {
+function _run_build()
+{
 	if [[ $# -ne 4 ]]; then
 		echo "Illegal arguments passed."
 		return
@@ -48,7 +49,6 @@ _run_build() {
 		autoreconf --install
 		./configure --quiet $CONFIG || exit 1
 		sed -i 's/m4 po intl doc contrib/intl/' Makefile
-		# sed -i 's/echo "Making $$target in $$subdir";//' Makefile
 		sed -i 's/\<cru\>/cr/' imap/Makefile
 		sed -i '/USE_DOTLOCK/d' config.h
 		make -s -j2 || exit 1
@@ -59,13 +59,13 @@ _run_build() {
 }
 
 
-if [ -n "$TRAVIS_BRANCH" ]; then
+if [ -n "${TRAVIS_BRANCH:-}" ]; then
 	BRANCH="$TRAVIS_BRANCH"
 else
 	BRANCH=$(git rev-parse --abbrev-ref HEAD)
 fi
 
-if [[ "$TRAVIS_PULL_REQUEST" =~ ^[0-9]+$ ]]; then
+if [[ "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
 	FILE="$CONFIG_DIR/pull-request.txt"
 else
 	FILE=$(get_config_location $BRANCH)
@@ -87,6 +87,26 @@ else
 	_run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
 fi
 
+if [ $BRANCH = "neomutt" ]; then
+	# We'll reuse the last build
+	git clean -xdfq
+	autoreconf --install
+	./configure --quiet --prefix=$HOME/install --enable-compressed --enable-debug --enable-exact-address --enable-gpgme --enable-hcache --enable-imap --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-nntp --enable-notmuch --enable-pop --enable-sidebar --enable-smtp --with-gnutls --with-gss --with-homespool --with-mixmaster --with-regex --with-sasl --with-ssl --with-tokyocabinet
+	echo "-------------------------------------------------------------------------------"
+	echo "MAKE"
+	make -j2
+	echo "-------------------------------------------------------------------------------"
+	echo "INSTALL"
+	make install
+	echo "-------------------------------------------------------------------------------"
+	echo "DIST"
+	make -s dist
+	echo "-------------------------------------------------------------------------------"
+	echo "DISTCHECK"
+	make -s distcheck
+	echo "-------------------------------------------------------------------------------"
+fi
 
 echo Success
 exit 0
+
