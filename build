@@ -91,6 +91,8 @@ if [ $BRANCH = "neomutt" ]; then
 	# Do a full build and test it
 	git clean -xdfq
 	autoreconf --install
+	# Don't exit if we can't run chgrp on mutt_dotlock
+	sed -i '/fix mutt_dotlock/s/exit 1 *;//' Makefile.am
 	./configure --quiet --prefix=$HOME/install --enable-compressed --enable-debug --enable-exact-address --enable-gpgme --enable-hcache --enable-imap --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-nntp --enable-notmuch --enable-pop --enable-sidebar --enable-smtp --with-gnutls --with-homespool --with-mixmaster --with-regex --with-sasl --with-ssl --with-tokyocabinet
 	echo "-------------------------------------------------------------------------------"
 	echo "MAKE"
