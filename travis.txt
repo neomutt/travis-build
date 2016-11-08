@@ -27,9 +27,12 @@
 --enable-gpgme
 --with-mixmaster
 --enable-exact-address --enable-flock --enable-gpgme --enable-imap --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-notmuch --enable-pop --enable-sidebar --enable-smtp --with-domain --with-homespool --with-mixmaster --with-regex
---enable-hcache --with-tokyocabinet --without-bdb --without-gdbm --without-qdbm
---enable-hcache --with-gdbm --without-bdb --without-qdbm --without-tokyocabinet
---enable-hcache --with-bdb --without-gdbm --without-qdbm --without-tokyocabinet
+--enable-hcache    --with-tokyocabinet --without-qdbm --without-gdbm --without-bdb --without-lmdb --without-kyotocabinet
+--enable-hcache --without-tokyocabinet    --with-qdbm --without-gdbm --without-bdb --without-lmdb --without-kyotocabinet
+--enable-hcache --without-tokyocabinet --without-qdbm    --with-gdbm --without-bdb --without-lmdb --without-kyotocabinet
+--enable-hcache --without-tokyocabinet --without-qdbm --without-gdbm    --with-bdb --without-lmdb --without-kyotocabinet
+--enable-hcache --without-tokyocabinet --without-qdbm --without-gdbm --without-bdb    --with-lmdb --without-kyotocabinet
+--enable-hcache --without-tokyocabinet --without-qdbm --without-gdbm --without-bdb --without-lmdb    --with-kyotocabinet
 --enable-imap --with-gss
 --enable-pop --with-ssl
 --enable-imap --with-ssl
