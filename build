@@ -47,9 +47,7 @@ function _run_build()
 		echo
 		git clean -xdfq
 		autoreconf --install
-		./configure --quiet $CONFIG || exit 1
-		sed -i 's/m4 po intl doc contrib/intl/' Makefile
-		sed -i 's/\<cru\>/cr/' imap/Makefile
+		./configure --quiet --disable-doc $CONFIG || exit 1
 		sed -i '/USE_DOTLOCK/d' config.h
 		make -s -j2 || exit 1
 		echo
