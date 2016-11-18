@@ -1,7 +1,0 @@
-
---enable-hcache --with-bdb
---enable-hcache --with-gdbm
---enable-hcache --with-kyotocabinet
---enable-hcache --with-lmdb
---enable-hcache --with-qdbm
---enable-hcache --with-tokyocabinet

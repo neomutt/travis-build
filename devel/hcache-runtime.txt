@@ -5,3 +5,4 @@
 --enable-hcache --with-lmdb
 --enable-hcache --with-qdbm
 --enable-hcache --with-tokyocabinet
+--enable-hcache --with-bdb --with-gdbm --with-kyotocabinet --with-lmdb --with-qdbm --with tokyocabinet
