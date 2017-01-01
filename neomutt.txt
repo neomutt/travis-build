@@ -1,3 +1,3 @@
 
 --disable-fcntl --disable-iconv --disable-nls --disable-pgp --disable-smime --with-included-gettext --without-idn --without-wc-funcs
---enable-exact-address --enable-flock --enable-gpgme --enable-imap --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-notmuch --enable-pop --enable-sidebar --enable-smtp --with-domain --with-homespool --with-mixmaster --with-regex
+--enable-exact-address --enable-flock --enable-gpgme --enable-imap --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-notmuch --enable-pop --enable-sidebar --enable-smtp --with-domain --with-homespool --with-mixmaster --with-regex --with-tokyocabinet
