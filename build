@@ -85,7 +85,7 @@ else
 	_run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
 fi
 
-if [ $BRANCH = "neomutt" ]; then
+if [[ $BRANCH = "neomutt" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
 	# Do a full build and test it
 	git clean -xdfq
 	autoreconf --install
