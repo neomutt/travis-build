@@ -91,7 +91,7 @@ if [[ $BRANCH = "neomutt" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
 	autoreconf --install
 	# Don't exit if we can't run chgrp on mutt_dotlock
 	sed -i '/fix mutt_dotlock/s/exit 1 *;//' Makefile.am
-	./configure --quiet --prefix=$HOME/install $(tail -n 1 neomutt.txt)
+	./configure --quiet --prefix=$HOME/install $(tail -n 1 $(get_config_location neomutt))
 	echo "-------------------------------------------------------------------------------"
 	echo "MAKE"
 	make -j2
