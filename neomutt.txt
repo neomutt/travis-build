@@ -1,3 +1,0 @@
-
---disable-fcntl --disable-iconv --disable-nls --disable-pgp --disable-smime --with-included-gettext --without-idn --without-wc-funcs
---enable-compressed --enable-debug --enable-exact-address --enable-flock --enable-gpgme --enable-imap --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-nntp --enable-notmuch --enable-pop --enable-sidebar --enable-smtp --with-bdb --with-domain --with-gdbm --with-gnutls --with-homespool --with-kyotocabinet --with-lmdb --with-mixmaster --with-qdbm --with-regex --with-sasl --with-ssl --with-tokyocabinet
