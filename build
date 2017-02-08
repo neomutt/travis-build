@@ -85,13 +85,13 @@ else
 	_run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
 fi
 
-if [[ $BRANCH = "neomutt" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
+if [[ $BRANCH = "master" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
 	# Do a full build and test it
 	git clean -xdfq
 	autoreconf --install
 	# Don't exit if we can't run chgrp on mutt_dotlock
 	sed -i '/fix mutt_dotlock/s/exit 1 *;//' Makefile.am
-	./configure --quiet --prefix=$HOME/install $(tail -n 1 $(get_config_location neomutt))
+	./configure --quiet --prefix=$HOME/install $(tail -n 1 $(get_config_location master))
 	echo "-------------------------------------------------------------------------------"
 	echo "MAKE"
 	make -j2
