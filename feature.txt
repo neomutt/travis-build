@@ -1,1 +1,1 @@
---enable-exact-address --enable-flock --enable-gpgme --enable-imap --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-pop --enable-smtp --with-domain --with-gnutls --with-gss --with-homespool --with-mixmaster --with-regex --with-sasl --with-ssl --with-tokyocabinet
+--enable-exact-address --enable-flock --enable-gpgme --enable-imap --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-notmuch --enable-pop --enable-smtp --with-domain --with-gnutls --with-gss --with-homespool --with-mixmaster --with-regex --with-sasl --with-ssl --with-tokyocabinet
