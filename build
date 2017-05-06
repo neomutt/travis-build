@@ -46,8 +46,8 @@ function _run_build()
 		fi
 		echo
 		git clean -xdfq
-		autoreconf --install --force
-		./configure --quiet --disable-doc --disable-po $CONFIG || exit 1
+		autoreconf --install --force > /dev/null
+		./configure --quiet --disable-doc --disable-po --enable-silent-rules $CONFIG || exit 1
 		sed -i '/USE_DOTLOCK/d' config.h
 		make -s -j2 || exit 1
 		echo
@@ -88,7 +88,7 @@ fi
 if [[ $BRANCH = "master" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
 	# Do a full build and test it
 	git clean -xdfq
-	autoreconf --install --force
+	autoreconf --install --force > /dev/null
 	# Don't exit if we can't run chgrp on mutt_dotlock
 	sed -i '/fix mutt_dotlock/s/exit 1 *;//' Makefile.am
 	./configure --quiet --prefix=$HOME/install $(tail -n 1 $(get_config_location master))
