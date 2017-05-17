@@ -19,14 +19,14 @@
 --enable-notmuch
 --enable-gpgme
 --with-mixmaster
---enable-exact-address --enable-flock --enable-gpgme --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-notmuch --with-domain --with-homespool --with-mixmaster
+--enable-dotlock --enable-exact-address --enable-flock --enable-gpgme --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-notmuch --with-domain --with-homespool --with-mixmaster
 --with-tokyocabinet
 --with-qdbm
 --with-gdbm
 --with-bdb
 --with-lmdb
 --with-kyotocabinet
---with-tokyocabinet --with-qdbm --with-gdbm --with-bdb --with-lmdb --with-kyotocabinet
+--with-bdb --with-gdbm --with-kyotocabinet --with-lmdb --with-qdbm --with-tokyocabinet
 --with-gss
 --with-ssl
 --with-gnutls
