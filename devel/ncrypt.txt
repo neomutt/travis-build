@@ -1,0 +1,8 @@
+--disable-gpgme --disable-pgp --disable-smime
+--disable-gpgme --disable-pgp --enable-smime
+--disable-gpgme --enable-pgp --disable-smime
+--disable-gpgme --enable-pgp --enable-smime
+--enable-gpgme --disable-pgp --disable-smime
+--enable-gpgme --disable-pgp --enable-smime
+--enable-gpgme --enable-pgp --disable-smime
+--enable-gpgme --enable-pgp --enable-smime

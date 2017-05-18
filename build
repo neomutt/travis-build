@@ -50,7 +50,6 @@ function _run_build()
 		git clean -xdfq
 		autoreconf --install --force > /dev/null
 		./configure --quiet --disable-doc --disable-po --enable-silent-rules $CONFIG || exit 1
-		sed -i '/USE_DOTLOCK/d' config.h
 		make -s -j2 || exit 1
 		echo
 		./mutt -v
