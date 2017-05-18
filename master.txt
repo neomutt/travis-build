@@ -1,3 +1,3 @@
 
 --disable-fcntl --disable-iconv --disable-nls --disable-pgp --disable-smime --with-included-gettext --without-idn --without-wc-funcs
---enable-debug --enable-dotlock --enable-exact-address --enable-flock --enable-gpgme --enable-locales-fix --enable-lua --enable-mailtool --enable-nfs-fix --enable-notmuch --with-bdb --with-domain --with-gdbm --with-gnutls --with-homespool --with-kyotocabinet --with-lmdb --with-mixmaster --with-qdbm --with-sasl --with-ssl --with-tokyocabinet
+--enable-debug --enable-dotlock --enable-exact-address --enable-flock --enable-gpgme --enable-locales-fix --enable-lua --enable-nfs-fix --enable-notmuch --with-bdb --with-domain --with-gdbm --with-gnutls --with-homespool --with-kyotocabinet --with-lmdb --with-mixmaster --with-qdbm --with-sasl --with-ssl --with-tokyocabinet

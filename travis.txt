@@ -11,7 +11,6 @@
 --enable-debug
 --enable-flock
 --enable-nfs-fix
---enable-mailtool
 --enable-locales-fix
 --enable-exact-address
 --with-homespool
