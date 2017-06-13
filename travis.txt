@@ -10,9 +10,7 @@
 --disable-fcntl --disable-iconv --disable-nls --disable-pgp --disable-smime --with-included-gettext --without-idn --without-wc-funcs
 --enable-debug
 --enable-flock
---enable-nfs-fix
 --enable-locales-fix
---enable-exact-address
 --with-homespool
 --with-domain
 --enable-notmuch
