@@ -5,6 +5,9 @@ set -o nounset	# set -u
 
 eval CONFIG_DIR="~/config"
 
+# Disable one warning, but fail on any others
+CFLAGS="-Wno-unused-result -Werror"
+
 function get_config_location()
 {
 	local TEST="/$1"
@@ -49,7 +52,7 @@ function _run_build()
 		echo
 		git clean -xdfq
 		autoreconf --install --force > /dev/null
-		./configure --quiet --disable-doc --disable-po --enable-silent-rules $CONFIG || exit 1
+		./configure --quiet --disable-doc --disable-po --enable-silent-rules $CONFIG CFLAGS="$CFLAGS" || exit 1
 		make -s -j2 || exit 1
 		echo
 		./mutt -v
@@ -90,9 +93,7 @@ if [[ $BRANCH = "master" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
 	# Do a full build and test it
 	git clean -xdfq
 	autoreconf --install --force > /dev/null
-	# Don't exit if we can't run chgrp on mutt_dotlock
-	sed -i '/fix mutt_dotlock/s/exit 1 *;//' Makefile.am
-	./configure --quiet --prefix=$HOME/install $(tail -n 1 $(get_config_location master))
+	./configure --quiet --prefix=$HOME/install $(tail -n 1 $(get_config_location master)) CFLAGS="$CFLAGS"
 	echo "-------------------------------------------------------------------------------"
 	echo "MAKE"
 	make -j2
