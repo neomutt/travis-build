@@ -24,6 +24,6 @@
 --bdb --gdbm --kyotocabinet --lmdb --qdbm --tokyocabinet
 --gss
 --sasl
---slang
+--with-ui=slang
 --gnutls
 --everything
