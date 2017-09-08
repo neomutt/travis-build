@@ -1,0 +1,29 @@
+
+--disable-fcntl
+--disable-locales-fix
+--disable-nls
+--disable-pgp
+--disable-smime
+--disable-ssl
+--disable-fcntl --disable-locales-fix --disable-nls --disable-pgp --disable-smime --disable-ssl
+--flock
+--gpgme
+--homespool
+--idn
+--logging
+--mixmaster
+--notmuch
+--with-domain=example.com
+--flock --gpgme --homespool --idn --logging --mixmaster --notmuch --with-domain=example.com
+--bdb
+--gdbm
+--kyotocabinet
+--lmdb
+--qdbm
+--tokyocabinet
+--bdb --gdbm --kyotocabinet --lmdb --qdbm --tokyocabinet
+--gss
+--sasl
+--slang
+--gnutls
+--everything

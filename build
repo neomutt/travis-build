@@ -51,12 +51,7 @@ function _run_build()
 		fi
 		echo
 		git clean -xdfq
-		autoreconf --install --force > /dev/null
-		if [[ $BRANCH == "mutt/"* ]]; then
-			./configure --quiet --disable-doc --enable-silent-rules $CONFIG || exit 1
-		else
-			./configure --quiet --disable-doc --disable-po --enable-silent-rules $CONFIG CFLAGS="$CFLAGS" || exit 1
-		fi
+		./configure.autosetup --quiet --disable-doc $CONFIG CFLAGS="$CFLAGS" || exit 1
 		make -s -j2 || exit 1
 		echo
 		[ -f mutt    ] && ./mutt -v
@@ -82,35 +77,29 @@ LEN=$(wc -l "$FILE" | cut -d' ' -f1)
 
 _run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
 
-if [[ $BRANCH = "master" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
-	# Do a full build and test it
-	git clean -xdfq
-	autoreconf --install --force > /dev/null
-	./configure --quiet --prefix=$HOME/install $(tail -n 1 $(get_config_location master)) CFLAGS="$CFLAGS"
-	echo "-------------------------------------------------------------------------------"
-	echo "MAKE"
-	make -j2
-	echo "-------------------------------------------------------------------------------"
-	echo "VALIDATE"
-	make -C doc validate
-	echo "-------------------------------------------------------------------------------"
-	echo "INSTALL"
-	make install
-	echo "-------------------------------------------------------------------------------"
-	echo "DIST"
-	make -s dist
-	echo "-------------------------------------------------------------------------------"
-	echo "DISTCHECK"
-	make -s distcheck
-	echo "-------------------------------------------------------------------------------"
-fi
+# if [[ $BRANCH = "master" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
+# 	# Do a full build and test it
+# 	git clean -xdfq
+# 	autoreconf --install --force > /dev/null
+# 	./configure --quiet --prefix=$HOME/install $(tail -n 1 $(get_config_location master)) CFLAGS="$CFLAGS"
+# 	echo "-------------------------------------------------------------------------------"
+# 	echo "MAKE"
+# 	make -j2
+# 	echo "-------------------------------------------------------------------------------"
+# 	echo "VALIDATE"
+# 	make -C doc validate
+# 	echo "-------------------------------------------------------------------------------"
+# 	echo "INSTALL"
+# 	make install
+# 	echo "-------------------------------------------------------------------------------"
+# fi
 
-if [[ $BRANCH = "feature/unit-test" ]]; then
-	echo "-------------------------------------------------------------------------------"
-	echo "TEST"
-	./mutt -T
-	echo "-------------------------------------------------------------------------------"
-fi
+# if [[ $BRANCH = "feature/unit-test" ]]; then
+# 	echo "-------------------------------------------------------------------------------"
+# 	echo "TEST"
+# 	./mutt -T
+# 	echo "-------------------------------------------------------------------------------"
+# fi
 
 echo Success
 exit 0
