@@ -59,7 +59,8 @@ function _run_build()
 		fi
 		make -s -j2 || exit 1
 		echo
-		./mutt -v
+		[ -f mutt    ] && ./mutt -v
+		[ -f neomutt ] && ./neomutt -v
 		echo "-------------------------------------------------------------------------------"
 	done < "$FILE"
 }
