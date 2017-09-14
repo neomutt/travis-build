@@ -1,31 +1,29 @@
 
+--everything
+--with-ui=slang
 --disable-fcntl
---disable-iconv
 --disable-nls
---with-included-gettext
---without-idn
---without-wc-funcs
 --disable-pgp
 --disable-smime
---disable-fcntl --disable-iconv --disable-nls --disable-pgp --disable-smime --with-included-gettext --without-idn --without-wc-funcs
---enable-debug
---enable-flock
---enable-locales-fix
---with-homespool
---with-domain
---enable-notmuch
---enable-gpgme
---with-mixmaster
---enable-dotlock --enable-exact-address --enable-flock --enable-gpgme --enable-locales-fix --enable-mailtool --enable-nfs-fix --enable-notmuch --with-domain --with-homespool --with-mixmaster
---with-tokyocabinet
---with-qdbm
---with-gdbm
---with-bdb
---with-lmdb
---with-kyotocabinet
---with-bdb --with-gdbm --with-kyotocabinet --with-lmdb --with-qdbm --with-tokyocabinet
---with-gss
---with-ssl
---with-gnutls
---with-sasl
---with-slang
+--disable-idn
+--disable-fcntl --disable-idn --disable-nls --disable-pgp --disable-smime
+--logging
+--flock
+--gpgme
+--homespool
+--locales-fix
+--mixmaster
+--notmuch
+--with-domain=example.com
+--flock --gpgme --homespool --locales-fix --mixmaster --notmuch --with-domain=example.com
+--bdb
+--gdbm
+--kyotocabinet
+--lmdb
+--qdbm
+--tokyocabinet
+--bdb --gdbm --kyotocabinet --lmdb --qdbm --tokyocabinet
+--gnutls
+--gss
+--sasl
+--ssl

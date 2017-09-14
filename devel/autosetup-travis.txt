@@ -1,20 +1,21 @@
 
+--everything
+--with-ui=slang
 --disable-fcntl
---disable-locales-fix
 --disable-nls
 --disable-pgp
 --disable-smime
---disable-ssl
---disable-fcntl --disable-locales-fix --disable-nls --disable-pgp --disable-smime --disable-ssl
+--disable-idn
+--disable-fcntl --disable-idn --disable-nls --disable-pgp --disable-smime
+--logging
 --flock
 --gpgme
 --homespool
---idn
---logging
+--locales-fix
 --mixmaster
 --notmuch
 --with-domain=example.com
---flock --gpgme --homespool --idn --logging --mixmaster --notmuch --with-domain=example.com
+--flock --gpgme --homespool --locales-fix --mixmaster --notmuch --with-domain=example.com
 --bdb
 --gdbm
 --kyotocabinet
@@ -22,8 +23,7 @@
 --qdbm
 --tokyocabinet
 --bdb --gdbm --kyotocabinet --lmdb --qdbm --tokyocabinet
+--gnutls
 --gss
 --sasl
---with-ui=slang
---gnutls
---everything
+--ssl
