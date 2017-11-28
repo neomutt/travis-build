@@ -89,6 +89,12 @@ function run_build()
 }
 
 
+GIT_DIR="${0%/*}/.git"
+if [ -d "$GIT_DIR" ]; then
+	VERSION=$(git --git-dir="$GIT_DIR" rev-parse --short HEAD)
+	echo "Travis build script: https://github.com/neomutt/travis-build/blob/$VERSION/build"
+fi
+
 if [ -n "${TRAVIS_BRANCH:-}" ]; then
 	BRANCH="$TRAVIS_BRANCH"
 else
