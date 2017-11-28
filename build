@@ -53,7 +53,11 @@ function _run_build()
 		echo -en "travis_fold:start:configure.$BUILD_COUNT\\r"
 		echo "Configure"
 		git clean -xdfq
-		./configure.autosetup --disable-doc $CONFIG || exit 1
+		if ! ./configure.autosetup --disable-doc $CONFIG; then
+			echo "-------------------------------------------------------------------------------"
+			[ -f config.log ] && cat config.log
+			exit 1
+		fi
 		echo -en "travis_fold:end:configure.$BUILD_COUNT\\r"
 		echo -en "travis_fold:start:make.$BUILD_COUNT\\r"
 		echo "Build"
