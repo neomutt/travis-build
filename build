@@ -6,7 +6,7 @@ set -o nounset	# set -u
 eval CONFIG_DIR="~/config"
 
 # Disable one warning, but fail on any others
-CFLAGS="-Wno-unused-result -Werror"
+EXTRA_CFLAGS="-Wno-unused-result -Werror"
 
 function get_config_location()
 {
@@ -45,7 +45,7 @@ function _run_build()
 		: $((BUILD_COUNT++))
 		echo "BUILD: $BUILD_COUNT/$LEN"
 		if [ -n "$CONFIG" ]; then
-			echo $CONFIG | fmt -w 75 | sed 's/^/    /'
+			echo "$CONFIG" | fmt -w 75 | sed 's/^/    /'
 		else
 			echo "    <no options>"
 		fi
@@ -53,11 +53,11 @@ function _run_build()
 		echo -en "travis_fold:start:configure.$BUILD_COUNT\\r"
 		echo "Configure"
 		git clean -xdfq
-		./configure.autosetup --disable-doc $CONFIG CFLAGS="$CFLAGS" || exit 1
+		./configure.autosetup --disable-doc $CONFIG || exit 1
 		echo -en "travis_fold:end:configure.$BUILD_COUNT\\r"
 		echo -en "travis_fold:start:make.$BUILD_COUNT\\r"
 		echo "Build"
-		make -j2 || exit 1
+		make -j2 EXTRA_CFLAGS="$EXTRA_CFLAGS" || exit 1
 		echo
 		echo -en "travis_fold:end:make.$BUILD_COUNT\\r"
 		echo -en "travis_fold:start:version.$BUILD_COUNT\\r"
