@@ -7,6 +7,7 @@ eval CONFIG_DIR="~/config"
 
 # Disable one warning, but fail on any others
 EXTRA_CFLAGS="-Wno-unused-result -Werror"
+FOLD=""
 
 function get_config_location()
 {
@@ -23,7 +24,20 @@ function get_config_location()
 	echo "$CONFIG_DIR/default.txt"
 }
 
-function _run_build()
+function start_fold()
+{
+	echo -en "travis_fold:start:$2\\r"
+	echo "$1"
+	FOLD="$2"
+}
+
+function end_fold()
+{
+	echo -en "travis_fold:end:$FOLD\\r"
+	FOLD=""
+}
+
+function run_build()
 {
 	if [[ $# -ne 4 ]]; then
 		echo "Illegal arguments passed."
@@ -50,24 +64,25 @@ function _run_build()
 			echo "    <no options>"
 		fi
 		echo
-		echo -en "travis_fold:start:configure.$BUILD_COUNT\\r"
-		echo "Configure"
+		start_fold "Configure" "configure.$BUILD_COUNT"
 		git clean -xdfq
 		if ! ./configure.autosetup --disable-doc $CONFIG; then
-			echo "-------------------------------------------------------------------------------"
-			[ -f config.log ] && cat config.log
-			exit 1
+			if [ -f config.log ]; then
+				echo "-------------------------------------------------------------------------------"
+				start_fold "Config Log" config.log.$BUILD_COUNT
+				cat config.log
+				end_fold
+				exit 1
+			fi
 		fi
-		echo -en "travis_fold:end:configure.$BUILD_COUNT\\r"
-		echo -en "travis_fold:start:make.$BUILD_COUNT\\r"
-		echo "Build"
+		end_fold
+		start_fold "Build" "make.$BUILD_COUNT"
 		make -j2 EXTRA_CFLAGS="$EXTRA_CFLAGS" || exit 1
 		echo
-		echo -en "travis_fold:end:make.$BUILD_COUNT\\r"
-		echo -en "travis_fold:start:version.$BUILD_COUNT\\r"
-		echo "Version"
+		end_fold
+		start_fold "Version" "version.$BUILD_COUNT"
 		./neomutt -v
-		echo -en "travis_fold:end:version.$BUILD_COUNT\\r"
+		end_fold
 		echo
 		echo "-------------------------------------------------------------------------------"
 	done < "$FILE"
@@ -83,12 +98,12 @@ fi
 if [[ "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
 	FILE="$CONFIG_DIR/pull-request.txt"
 else
-	FILE=$(get_config_location $BRANCH)
+	FILE=$(get_config_location "$BRANCH")
 fi
 
 LEN=$(wc -l "$FILE" | cut -d' ' -f1)
 
-_run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
+run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
 
 # if [[ $BRANCH = "master" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
 # 	# Do a full build and test it
