@@ -7,7 +7,6 @@
 --disable-smime
 --disable-idn
 --disable-fcntl --disable-idn --disable-nls --disable-pgp --disable-smime
---logging
 --flock
 --gpgme
 --homespool
