@@ -66,7 +66,13 @@ function run_build()
 		echo
 		start_fold "Configure" "configure.$BUILD_COUNT"
 		git clean -xdfq
-		if ! ./configure.autosetup --disable-doc $CONFIG; then
+		if [ -f configure.autosetup ]; then
+			CONFIGURE=./configure.autosetup
+		else
+			CONFIGURE=./configure
+		fi
+
+		if ! $CONFIGURE --disable-doc $CONFIG; then
 			if [ -f config.log ]; then
 				echo "-------------------------------------------------------------------------------"
 				start_fold "Config Log" config.log.$BUILD_COUNT
