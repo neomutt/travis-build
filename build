@@ -86,6 +86,7 @@ function run_build()
 		make -j2 EXTRA_CFLAGS="$EXTRA_CFLAGS" || exit 1
 		echo
 		end_fold
+		[ -d test ] && make -s test
 		start_fold "Version" "version.$BUILD_COUNT"
 		./neomutt -v
 		end_fold
@@ -120,13 +121,6 @@ run_build "$BRANCH" "$LEN" "$FILE" "$CONFIG_DIR"
 # if [[ $BRANCH = "master" && ! "${TRAVIS_PULL_REQUEST:-}" =~ ^[0-9]+$ ]]; then
 # 	# Do a full build and test it
 # fi
-
-if [[ $BRANCH = "feature/unit-test" ]]; then
-	echo "-------------------------------------------------------------------------------"
-	echo "TEST"
-	./neomutt -T
-	echo "-------------------------------------------------------------------------------"
-fi
 
 echo Success
 exit 0
