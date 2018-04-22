@@ -1,1 +1,1 @@
---flock --gnutls --gpgme --gss --homespool --lua --mixmaster --notmuch --sasl --tokyocabinet --with-domain=example.com
+--gnutls --gpgme --gss --homespool --lua --mixmaster --notmuch --sasl --tokyocabinet --with-domain=example.com
