@@ -1,26 +1,10 @@
 
 --everything
 --with-ui=slang
---disable-fcntl
---disable-nls
---disable-pgp
---disable-smime
---disable-idn
---disable-fcntl --disable-idn --disable-nls --disable-pgp --disable-smime
---flock
---gpgme
---homespool
---locales-fix
---mixmaster
---notmuch
---with-domain=example.com
---flock --gpgme --homespool --locales-fix --mixmaster --notmuch --with-domain=example.com
---bdb
---gdbm
---kyotocabinet
---lmdb
---qdbm
---tokyocabinet
+--disable-idn --disable-nls --disable-pgp --disable-smime
+--disable-idn --with-idn2
+--with-lock=flock
+--gpgme --homespool --locales-fix --mixmaster --notmuch --with-domain=example.com
 --bdb --gdbm --kyotocabinet --lmdb --qdbm --tokyocabinet
 --gnutls
 --gss
