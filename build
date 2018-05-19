@@ -27,6 +27,8 @@ function get_config_location()
 function start_fold()
 {
 	echo -en "travis_fold:start:$2\\r"
+	# travis_fold start "$2"
+	# travis_time_start
 	echo "$1"
 	FOLD="$2"
 }
@@ -34,6 +36,8 @@ function start_fold()
 function end_fold()
 {
 	echo -en "travis_fold:end:$FOLD\\r"
+	# travis_time_finish
+	# travis_fold end "$FOLD"
 	FOLD=""
 }
 
@@ -86,7 +90,9 @@ function run_build()
 		make -j2 EXTRA_CFLAGS="$EXTRA_CFLAGS" || exit 1
 		echo
 		end_fold
+		start_fold "Test" "test.$BUILD_COUNT"
 		[ -d test ] && make -s test
+		end_fold
 		start_fold "Version" "version.$BUILD_COUNT"
 		./neomutt -v
 		end_fold
