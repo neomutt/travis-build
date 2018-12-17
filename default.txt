@@ -1,1 +1,2 @@
 --gnutls --gpgme --gss --homespool --lua --mixmaster --notmuch --sasl --tokyocabinet --with-domain=example.com --with-lock=flock
+--disable-idn --disable-nls --disable-pgp --disable-smime
