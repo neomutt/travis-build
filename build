@@ -59,6 +59,11 @@ function run_build()
 	echo "CONFIGURATIONS: $LEN"
 	echo "-------------------------------------------------------------------------------"
 	BUILD_COUNT=0
+  if grep -q "testing=0" auto.def; then
+    TESTING="--testing"
+  else
+    TESTING=""
+  fi
 	while read CONFIG; do
 		: $((BUILD_COUNT++))
 		echo "BUILD: $BUILD_COUNT/$LEN"
@@ -70,13 +75,8 @@ function run_build()
 		echo
 		start_fold "Configure" "configure.$BUILD_COUNT"
 		git clean -xdfq
-		if [ -f configure.autosetup ]; then
-			CONFIGURE=./configure.autosetup
-		else
-			CONFIGURE=./configure
-		fi
 
-		if ! $CONFIGURE --disable-doc $CONFIG; then
+		if ! ./configure --disable-doc $TESTING $CONFIG; then
 			if [ -f config.log ]; then
 				echo "-------------------------------------------------------------------------------"
 				start_fold "Config Log" config.log.$BUILD_COUNT
