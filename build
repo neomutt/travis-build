@@ -5,8 +5,7 @@ set -o nounset	# set -u
 
 eval CONFIG_DIR="~/config"
 
-# Disable one warning, but fail on any others
-EXTRA_CFLAGS="-Wno-unused-result -Werror"
+EXTRA_CFLAGS="-Wno-unused-result"
 FOLD=""
 
 function get_config_location()
