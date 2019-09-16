@@ -1,1 +1,1 @@
-feature.txt
+--autocrypt --bdb --disable-idn --fmemopen --full-doc --gdbm --gnutls --gpgme --gss --homespool --idn2 --kyotocabinet --lmdb --locales-fix --lua --mixmaster --notmuch --qdbm --sasl --tokyocabinet --with-domain=example.com --with-lock=fcntl --with-ui=ncurses
