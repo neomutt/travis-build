@@ -1,2 +1,2 @@
---autocrypt --bdb --disable-idn --full-doc --gdbm --gnutls --gpgme --gss --idn2 --kyotocabinet --lmdb --lua --notmuch --qdbm --sasl --tokyocabinet --with-lock=fcntl --with-ui=ncurses
---fmemopen --homespool --locales-fix --mixmaster --ssl --with-domain=example.com --with-lock=flock --with-ui=slang
+--autocrypt --bdb --disable-idn --full-doc --gdbm --gnutls --gpgme --gss --idn2 --kyotocabinet --lmdb --lua --notmuch --qdbm --sasl --tokyocabinet --with-lock=fcntl
+--fmemopen --homespool --locales-fix --mixmaster --ssl --with-domain=example.com --with-lock=flock

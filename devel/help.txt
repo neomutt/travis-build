@@ -1,2 +1,2 @@
---autocrypt --bdb --disable-idn --full-doc --gdbm --gnutls --gpgme --gss --idn2 --kyotocabinet --lmdb --lua --notmuch --qdbm --sasl --tokyocabinet --with-lock=fcntl --with-ui=ncurses --devel-help
+--autocrypt --bdb --disable-idn --full-doc --gdbm --gnutls --gpgme --gss --idn2 --kyotocabinet --lmdb --lua --notmuch --qdbm --sasl --tokyocabinet --with-lock=fcntl --devel-help
 
